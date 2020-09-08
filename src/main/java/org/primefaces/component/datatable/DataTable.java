@@ -235,6 +235,10 @@ public class DataTable extends DataTableBase {
         return context.getExternalContext().getRequestParameterMap().containsKey(getClientId(context) + "_scrolling");
     }
 
+    public boolean isSelectionRequest(FacesContext context) {
+        return context.getExternalContext().getRequestParameterMap().containsKey(getClientId(context) + "_selection");
+    }
+
     public boolean isRowEditCancelRequest(FacesContext context) {
         Map<String, String> params = context.getExternalContext().getRequestParameterMap();
         String value = params.get(getClientId(context) + "_rowEditAction");
@@ -588,6 +592,9 @@ public class DataTable extends DataTableBase {
 
         if (model instanceof LazyDataModel) {
             LazyDataModel lazyModel = (LazyDataModel) model;
+
+            Object selection = getSelection();
+            lazyModel.setSelectedData(selection instanceof List ? (List) selection : Arrays.asList(selection));
 
             List<?> data = null;
             if (isMultiSort()) {

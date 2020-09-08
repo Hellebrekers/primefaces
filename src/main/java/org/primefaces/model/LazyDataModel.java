@@ -51,6 +51,8 @@ public abstract class LazyDataModel<T> extends DataModel<T> implements Selectabl
 
     private List<T> data;
 
+    private List<T> selectedData; // Currently only used in loadLazyScrollData
+
     public LazyDataModel() {
         super();
     }
@@ -116,6 +118,14 @@ public abstract class LazyDataModel<T> extends DataModel<T> implements Selectabl
     @Override
     public void setWrappedData(Object list) {
         this.data = (List) list;
+    }
+
+    public List<T> getSelectedData() {
+        return selectedData;
+    }
+
+    public void setSelectedData(List<T> selectedData) {
+        this.selectedData = selectedData;
     }
 
     public int getPageSize() {
