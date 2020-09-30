@@ -27,13 +27,14 @@ import java.util.List;
 
 import javax.faces.application.ResourceDependency;
 
+import org.primefaces.model.Disableable;
 import org.primefaces.util.LangUtils;
 
 @ResourceDependency(library = "primefaces", name = "components.css")
 @ResourceDependency(library = "primefaces", name = "jquery/jquery.js")
 @ResourceDependency(library = "primefaces", name = "core.js")
 @ResourceDependency(library = "primefaces", name = "components.js")
-public class SelectOneListbox extends SelectOneListboxBase {
+public class SelectOneListbox extends SelectOneListboxBase implements Disableable {
 
     public static final String COMPONENT_TYPE = "org.primefaces.component.SelectOneListbox";
 

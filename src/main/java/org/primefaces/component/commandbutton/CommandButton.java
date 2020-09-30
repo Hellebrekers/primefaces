@@ -25,6 +25,7 @@ package org.primefaces.component.commandbutton;
 
 import org.primefaces.component.api.DialogReturnAware;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.Disableable;
 import org.primefaces.util.HTML;
 import org.primefaces.util.LangUtils;
 import org.primefaces.util.MapBuilder;
@@ -41,7 +42,7 @@ import java.util.Map;
 @ResourceDependency(library = "primefaces", name = "jquery/jquery-plugins.js")
 @ResourceDependency(library = "primefaces", name = "core.js")
 @ResourceDependency(library = "primefaces", name = "components.js")
-public class CommandButton extends CommandButtonBase implements DialogReturnAware {
+public class CommandButton extends CommandButtonBase implements DialogReturnAware, Disableable {
 
     public static final String COMPONENT_TYPE = "org.primefaces.component.CommandButton";
 

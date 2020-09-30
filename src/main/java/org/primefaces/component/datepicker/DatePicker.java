@@ -35,6 +35,7 @@ import javax.faces.event.PhaseId;
 
 import org.primefaces.event.DateViewChangeEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.Disableable;
 import org.primefaces.util.CalendarUtils;
 import org.primefaces.util.ComponentUtils;
 import org.primefaces.util.Constants;
@@ -46,7 +47,7 @@ import org.primefaces.util.Constants;
 @ResourceDependency(library = "primefaces", name = "components.js")
 @ResourceDependency(library = "primefaces", name = "inputmask/inputmask.js")
 @ResourceDependency(library = "primefaces", name = "datepicker/datepicker.js")
-public class DatePicker extends DatePickerBase {
+public class DatePicker extends DatePickerBase implements Disableable {
 
     public static final String COMPONENT_TYPE = "org.primefaces.component.DatePicker";
     public static final String CONTAINER_EXTENSION_CLASS = "p-datepicker";

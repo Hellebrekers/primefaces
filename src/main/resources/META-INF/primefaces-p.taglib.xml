@@ -18244,6 +18244,11 @@
             <required>false</required>
             <type>java.faces.convert.Converter</type>
         </attribute>
+        <attribute>
+            <name>disabled</name>
+            <type>java.lang.Boolean</type>
+            <description>Disables the outputLabel.</description>
+        </attribute>
     </tag>
     <tag>
         <description>

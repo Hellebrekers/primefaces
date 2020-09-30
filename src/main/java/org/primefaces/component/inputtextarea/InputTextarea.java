@@ -35,6 +35,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.Disableable;
 import org.primefaces.util.Constants;
 import org.primefaces.util.LangUtils;
 
@@ -43,7 +44,7 @@ import org.primefaces.util.LangUtils;
 @ResourceDependency(library = "primefaces", name = "jquery/jquery-plugins.js")
 @ResourceDependency(library = "primefaces", name = "core.js")
 @ResourceDependency(library = "primefaces", name = "components.js")
-public class InputTextarea extends InputTextareaBase {
+public class InputTextarea extends InputTextareaBase implements Disableable {
 
     public static final String COMPONENT_TYPE = "org.primefaces.component.InputTextarea";
     public static final String STYLE_CLASS = "ui-inputfield ui-inputtextarea ui-widget ui-state-default ui-corner-all";

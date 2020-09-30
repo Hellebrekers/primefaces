@@ -23,6 +23,7 @@
  */
 package org.primefaces.component.outputlabel;
 
+import org.primefaces.expression.SearchExpressionFacade;
 import javax.faces.component.html.HtmlOutputLabel;
 
 
@@ -34,7 +35,9 @@ public abstract class OutputLabelBase extends HtmlOutputLabel {
 
     public enum PropertyKeys {
 
-        indicateRequired;
+        indicateRequired,
+
+        disabled
     }
 
     public OutputLabelBase() {
@@ -54,4 +57,22 @@ public abstract class OutputLabelBase extends HtmlOutputLabel {
         getStateHelper().put(PropertyKeys.indicateRequired, indicateRequired);
     }
 
+    public Boolean getDisabled() {
+        return (Boolean) getStateHelper().eval(PropertyKeys.disabled, null);
+    }
+
+    public void isDisabled(Boolean disabled) {
+        getStateHelper().put(PropertyKeys.disabled, disabled);
+    }
+
+    @Override
+    public boolean isRendered() {
+        String _for = getFor();
+        if (_for != null) {
+            if (!SearchExpressionFacade.resolveComponent(getFacesContext(), this, _for).isRendered()) {
+                return false;
+            }
+        }
+        return super.isRendered();
+    }
 }

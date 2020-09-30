@@ -23,13 +23,15 @@
  */
 package org.primefaces.component.inputtext;
 
+import org.primefaces.model.Disableable;
+
 import javax.faces.application.ResourceDependency;
 
 @ResourceDependency(library = "primefaces", name = "components.css")
 @ResourceDependency(library = "primefaces", name = "jquery/jquery.js")
 @ResourceDependency(library = "primefaces", name = "core.js")
 @ResourceDependency(library = "primefaces", name = "components.js")
-public class InputText extends InputTextBase {
+public class InputText extends InputTextBase implements Disableable {
 
     public static final String COMPONENT_TYPE = "org.primefaces.component.InputText";
 

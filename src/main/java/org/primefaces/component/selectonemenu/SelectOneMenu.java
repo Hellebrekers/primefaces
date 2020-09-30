@@ -42,6 +42,7 @@ import org.primefaces.component.column.Column;
 import org.primefaces.config.PrimeConfiguration;
 import org.primefaces.context.PrimeApplicationContext;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.Disableable;
 import org.primefaces.util.ComponentUtils;
 import org.primefaces.util.Constants;
 import org.primefaces.util.LangUtils;
@@ -52,7 +53,7 @@ import org.primefaces.util.MessageFactory;
 @ResourceDependency(library = "primefaces", name = "jquery/jquery-plugins.js")
 @ResourceDependency(library = "primefaces", name = "core.js")
 @ResourceDependency(library = "primefaces", name = "components.js")
-public class SelectOneMenu extends SelectOneMenuBase {
+public class SelectOneMenu extends SelectOneMenuBase implements Disableable {
 
     public static final String COMPONENT_TYPE = "org.primefaces.component.SelectOneMenu";
 

@@ -46,6 +46,7 @@ import org.primefaces.context.PrimeApplicationContext;
 import org.primefaces.el.ValueExpressionAnalyzer;
 import org.primefaces.expression.SearchExpressionFacade;
 import org.primefaces.metadata.BeanValidationMetadataExtractor;
+import org.primefaces.model.Disableable;
 import org.primefaces.renderkit.CoreRenderer;
 import org.primefaces.util.*;
 
@@ -72,6 +73,7 @@ public class OutputLabelRenderer extends CoreRenderer {
         final EditableValueHolderState state = new EditableValueHolderState();
 
         final String indicateRequired = label.getIndicateRequired();
+        final Boolean isDisabled = label.getDisabled();
 
         String _for = label.getFor();
         if (!isValueBlank(_for)) {
@@ -86,6 +88,12 @@ public class OutputLabelRenderer extends CoreRenderer {
                     }
                     else {
                         state.setClientId(target.getClientId(context));
+                    }
+
+                    if (isDisabled == null || !isDisabled) {
+                        if (target instanceof Disableable && ((Disableable) target).isDisabled()) {
+                            styleClass.append(" ui-state-disabled");
+                        }
                     }
 
                     if (target instanceof UIInput) {
@@ -136,6 +144,10 @@ public class OutputLabelRenderer extends CoreRenderer {
             else {
                 callback.invokeContextCallback(context, forComponent);
             }
+        }
+
+        if (isDisabled != null && isDisabled) {
+            styleClass.append(" ui-state-disabled");
         }
 
         writer.startElement("label", label);

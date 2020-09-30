@@ -23,6 +23,8 @@
  */
 package org.primefaces.component.inputnumber;
 
+import org.primefaces.model.Disableable;
+
 import javax.faces.application.ResourceDependency;
 
 @ResourceDependency(library = "primefaces", name = "components.css")
@@ -31,7 +33,7 @@ import javax.faces.application.ResourceDependency;
 @ResourceDependency(library = "primefaces", name = "components.js")
 @ResourceDependency(library = "primefaces", name = "inputnumber/inputnumber.js")
 @ResourceDependency(library = "primefaces", name = "inputnumber/inputnumber.css")
-public class InputNumber extends InputNumberBase {
+public class InputNumber extends InputNumberBase implements Disableable {
 
     public static final String COMPONENT_TYPE = "org.primefaces.component.InputNumber";
 

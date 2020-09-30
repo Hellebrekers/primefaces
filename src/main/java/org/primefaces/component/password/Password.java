@@ -28,6 +28,7 @@ import javax.faces.application.ResourceDependency;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.expression.SearchExpressionFacade;
+import org.primefaces.model.Disableable;
 import org.primefaces.util.LangUtils;
 import org.primefaces.util.MessageFactory;
 
@@ -36,7 +37,7 @@ import org.primefaces.util.MessageFactory;
 @ResourceDependency(library = "primefaces", name = "jquery/jquery-plugins.js")
 @ResourceDependency(library = "primefaces", name = "core.js")
 @ResourceDependency(library = "primefaces", name = "components.js")
-public class Password extends PasswordBase {
+public class Password extends PasswordBase implements Disableable {
 
     public static final String COMPONENT_TYPE = "org.primefaces.component.Password";
 

@@ -35,6 +35,7 @@ import javax.faces.event.FacesEvent;
 import org.primefaces.component.api.AbstractPrimeHtmlInputText;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
+import org.primefaces.model.Disableable;
 import org.primefaces.util.ComponentUtils;
 import org.primefaces.util.Constants;
 import org.primefaces.util.LangUtils;
@@ -43,7 +44,7 @@ import org.primefaces.util.LangUtils;
 @ResourceDependency(library = "primefaces", name = "jquery/jquery.js")
 @ResourceDependency(library = "primefaces", name = "core.js")
 @ResourceDependency(library = "primefaces", name = "components.js")
-public class Chips extends ChipsBase {
+public class Chips extends ChipsBase implements Disableable {
 
     public static final String COMPONENT_TYPE = "org.primefaces.component.Chips";
     public static final String STYLE_CLASS = "ui-chips ui-widget";

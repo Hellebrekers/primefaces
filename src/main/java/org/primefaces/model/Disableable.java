@@ -21,25 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.primefaces.component.tristatecheckbox;
+package org.primefaces.model;
 
-import org.primefaces.model.Disableable;
-
-import javax.faces.application.ResourceDependency;
-
-@ResourceDependency(library = "primefaces", name = "components.css")
-@ResourceDependency(library = "primefaces", name = "jquery/jquery.js")
-@ResourceDependency(library = "primefaces", name = "jquery/jquery-plugins.js")
-@ResourceDependency(library = "primefaces", name = "core.js")
-@ResourceDependency(library = "primefaces", name = "components.js")
-public class TriStateCheckbox extends TriStateCheckboxBase implements Disableable {
-
-    public static final String COMPONENT_TYPE = "org.primefaces.component.TriStateCheckbox";
-    public static final String UI_ICON = "ui-icon ";
-
-    @Override
-    public String getDefaultEventName() {
-        return "valueChange";
-    }
-
+public interface Disableable {
+    boolean isDisabled();
+    void setDisabled(boolean disabled);
 }

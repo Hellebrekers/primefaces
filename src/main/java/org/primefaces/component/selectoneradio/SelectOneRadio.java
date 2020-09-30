@@ -29,13 +29,14 @@ import javax.faces.application.ResourceDependency;
 import javax.faces.component.UINamingContainer;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.model.Disableable;
 import org.primefaces.util.LangUtils;
 
 @ResourceDependency(library = "primefaces", name = "components.css")
 @ResourceDependency(library = "primefaces", name = "jquery/jquery.js")
 @ResourceDependency(library = "primefaces", name = "core.js")
 @ResourceDependency(library = "primefaces", name = "components.js")
-public class SelectOneRadio extends SelectOneRadioBase {
+public class SelectOneRadio extends SelectOneRadioBase implements Disableable {
 
     public static final String COMPONENT_TYPE = "org.primefaces.component.SelectOneRadio";
 
