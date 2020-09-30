@@ -24,8 +24,10 @@
 package org.primefaces.component.inputnumber;
 
 import org.primefaces.model.Disableable;
+import org.primefaces.util.LangUtils;
 
 import javax.faces.application.ResourceDependency;
+import java.util.Collection;
 
 @ResourceDependency(library = "primefaces", name = "components.css")
 @ResourceDependency(library = "primefaces", name = "jquery/jquery.js")
@@ -38,6 +40,11 @@ public class InputNumber extends InputNumberBase implements Disableable {
     public static final String COMPONENT_TYPE = "org.primefaces.component.InputNumber";
 
     public static final String STYLE_CLASS = "ui-inputnumber ui-widget";
+
+    private static final Collection<String> EVENT_NAMES = LangUtils.unmodifiableList("blur", "change", "valueChange", "click", "dblclick",
+            "focus", "keydown", "keypress", "keyup", "mousedown", "mousemove", "mouseout", "mouseover", "mouseup", "select",
+            "query");
+    private static final Collection<String> UNOBSTRUSIVE_EVENT_NAMES = LangUtils.unmodifiableList("query");
 
     @Override
     public String getInputClientId() {
@@ -59,4 +66,13 @@ public class InputNumber extends InputNumberBase implements Disableable {
         getStateHelper().put("labelledby", labelledBy);
     }
 
+    @Override
+    public Collection<String> getEventNames() {
+        return EVENT_NAMES;
+    }
+
+    @Override
+    public Collection<String> getUnobstrusiveEventNames() {
+        return UNOBSTRUSIVE_EVENT_NAMES;
+    }
 }

@@ -73,6 +73,7 @@ public class InputTextRenderer extends InputRenderer {
         String counter = inputText.getCounter();
         WidgetBuilder wb = getWidgetBuilder(context);
         wb.init("InputText", inputText.resolveWidgetVar(context), clientId)
+                .attr("queryDelay", inputText.getQueryDelay())
                 .attr("maxlength", inputText.getMaxlength(), Integer.MIN_VALUE);
 
         if (counter != null) {
@@ -81,6 +82,8 @@ public class InputTextRenderer extends InputRenderer {
             wb.attr("counter", counterComponent.getClientId(context))
                     .attr("counterTemplate", inputText.getCounterTemplate(), null);
         }
+
+        encodeClientBehaviors(context, inputText);
 
         wb.finish();
     }

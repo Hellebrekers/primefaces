@@ -24,11 +24,12 @@
 package org.primefaces.component.inputtext;
 
 import org.primefaces.component.api.AbstractPrimeHtmlInputText;
+import org.primefaces.component.api.MixedClientBehaviorHolder;
 import org.primefaces.component.api.RTLAware;
 import org.primefaces.component.api.Widget;
 import org.primefaces.model.AttributeMutator;
 
-public abstract class InputTextBase extends AbstractPrimeHtmlInputText implements Widget, RTLAware {
+public abstract class InputTextBase extends AbstractPrimeHtmlInputText implements Widget, RTLAware, MixedClientBehaviorHolder {
 
     public static final String COMPONENT_FAMILY = "org.primefaces.component";
 
@@ -42,7 +43,8 @@ public abstract class InputTextBase extends AbstractPrimeHtmlInputText implement
         counter,
         counterTemplate,
 
-        mutator
+        mutator,
+        queryDelay
     }
 
     public InputTextBase() {
@@ -121,4 +123,12 @@ public abstract class InputTextBase extends AbstractPrimeHtmlInputText implement
     public String getTabindex() {
         return AttributeMutator.optionallyOverrideTabindex(super.getTabindex(), getMutator());
     }
+    public int getQueryDelay() {
+        return (Integer) getStateHelper().eval(PropertyKeys.queryDelay, 300);
+    }
+
+    public void setQueryDelay(int queryDelay) {
+        getStateHelper().put(PropertyKeys.queryDelay, queryDelay);
+    }
+
 }

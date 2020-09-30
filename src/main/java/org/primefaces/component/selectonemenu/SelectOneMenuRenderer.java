@@ -151,6 +151,13 @@ public class SelectOneMenuRenderer extends SelectOneRenderer {
         encodeMenuIcon(context, menu, valid);
         encodePanel(context, menu, selectItems);
 
+        if (menu.isInitialValueIsFirstSelectItem() && menu.getValue() == null) {
+            ValueExpression menuValueExpression = menu.getValueExpression("value");
+            if (menuValueExpression != null) {
+                menuValueExpression.setValue(context.getELContext(), selectItems.get(0).getValue());
+            }
+        }
+
         writer.endElement("div");
     }
 

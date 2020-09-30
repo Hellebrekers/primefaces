@@ -5127,6 +5127,14 @@
             <required>false</required>
             <type>java.lang.String</type>
         </attribute>
+       <attribute>
+          <description>
+             <![CDATA[Defines the type of data to be used in the FilterWriter]]>
+          </description>
+          <name>filterFormDataType</name>
+          <required>false</required>
+          <type>java.lang.String</type>
+       </attribute>
     </tag>
     <tag>
         <description>
@@ -8282,6 +8290,14 @@
             <required>false</required>
             <type>java.lang.Boolean</type>
         </attribute>
+       <attribute>
+          <description>
+             <![CDATA[Enable touch support if browser detection supports it. Default is true.]]>
+          </description>
+          <name>filterFormEntries</name>
+          <required>false</required>
+          <type><![CDATA[java.util.List<org.primefaces.model.filter.FilterFormEntry>]]></type>
+       </attribute>
     </tag>
     <tag>
         <description>
@@ -13765,6 +13781,14 @@
             <name>mutator</name>
             <required>false</required>
             <type>org.primefaces.model.AttributeMutator</type>
+        </attribute>
+       <attribute>
+          <description>
+          <![CDATA[Delay to wait in milliseconds before sending each query to the server. Default is 700]]>
+            </description>
+            <name>queryDelay</name>
+            <required>false</required>
+            <type>java.lang.Integer</type>
         </attribute>
     </tag>
     <tag>
@@ -23876,6 +23900,14 @@
              <![CDATA[]]>
           </description>
           <name>disabledAsLabel</name>
+          <required>false</required>
+          <type>boolean</type>
+       </attribute>
+       <attribute>
+          <description>
+             <![CDATA[]]>
+          </description>
+          <name>initialValueIsFirstSelectItem</name>
           <required>false</required>
           <type>boolean</type>
        </attribute>

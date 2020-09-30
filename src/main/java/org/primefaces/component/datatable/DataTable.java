@@ -58,6 +58,8 @@ import org.primefaces.event.data.SortEvent;
 import org.primefaces.model.*;
 import org.primefaces.util.*;
 
+import static java.util.stream.Collectors.toList;
+
 @ResourceDependency(library = "primefaces", name = "components.css")
 @ResourceDependency(library = "primefaces", name = "jquery/jquery.js")
 @ResourceDependency(library = "primefaces", name = "jquery/jquery-plugins.js")
@@ -919,6 +921,14 @@ public class DataTable extends DataTableBase {
         }
 
         return null;
+    }
+
+    public List<UIColumn> getColumnsWithFilterFormDataType() {
+        return getColumns().stream().filter(c -> ((Column) c).getFilterFormDataType() != null).collect(toList());
+    }
+
+    public UIColumn getColumnWithId(String id) {
+        return getColumns().stream().filter(c -> ((Column) c).getId().equals(id)).findFirst().orElse(null);
     }
 
     public int getColumnsCount() {

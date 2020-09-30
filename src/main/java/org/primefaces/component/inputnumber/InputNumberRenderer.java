@@ -227,6 +227,7 @@ public class InputNumberRenderer extends InputRenderer {
         WidgetBuilder wb = getWidgetBuilder(context);
         wb.init(InputNumber.class.getSimpleName(), inputNumber.resolveWidgetVar(context), inputNumber.getClientId());
         wb.attr("disabled", inputNumber.isDisabled())
+            .attr("queryDelay", inputNumber.getQueryDelay())
             .attr("valueToRender", valueToRender)
             .attr("decimalCharacter", decimalSeparator, ".")
             .attr("decimalCharacterAlternative", inputNumber.getDecimalSeparatorAlternative(), null)
@@ -243,6 +244,8 @@ public class InputNumberRenderer extends InputRenderer {
             .attr("roundingMethod", inputNumber.getRoundMethod(), "S")
             .attr("selectOnFocus", false, true)
             .attr("showWarnings", false, true);
+
+        encodeClientBehaviors(context, inputNumber);
 
         wb.finish();
     }

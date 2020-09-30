@@ -25,12 +25,13 @@ package org.primefaces.component.inputnumber;
 
 import org.primefaces.component.api.AbstractPrimeHtmlInputText;
 import org.primefaces.component.api.InputHolder;
+import org.primefaces.component.api.MixedClientBehaviorHolder;
 import org.primefaces.component.api.Widget;
 import org.primefaces.model.AttributeMutator;
 import org.primefaces.util.ComponentUtils;
 import org.primefaces.util.LocaleUtils;
 
-public abstract class InputNumberBase extends AbstractPrimeHtmlInputText implements Widget, InputHolder {
+public abstract class InputNumberBase extends AbstractPrimeHtmlInputText implements Widget, InputHolder, MixedClientBehaviorHolder {
 
     public static final String COMPONENT_FAMILY = "org.primefaces.component";
 
@@ -57,7 +58,8 @@ public abstract class InputNumberBase extends AbstractPrimeHtmlInputText impleme
         decimalSeparatorAlternative,
         modifyValueOnWheel,
 
-        mutator
+        mutator,
+        queryDelay
     }
 
     public InputNumberBase() {
@@ -241,5 +243,13 @@ public abstract class InputNumberBase extends AbstractPrimeHtmlInputText impleme
     @Override
     public String getTabindex() {
         return AttributeMutator.optionallyOverrideTabindex(super.getTabindex(), getMutator());
+    }
+
+    public int getQueryDelay() {
+        return (Integer) getStateHelper().eval(PropertyKeys.queryDelay, 300);
+    }
+
+    public void setQueryDelay(int queryDelay) {
+        getStateHelper().put(PropertyKeys.queryDelay, queryDelay);
     }
 }

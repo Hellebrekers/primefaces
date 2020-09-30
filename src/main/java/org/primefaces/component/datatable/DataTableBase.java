@@ -26,10 +26,12 @@ package org.primefaces.component.datatable;
 import org.primefaces.component.api.*;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.SortMeta;
+import org.primefaces.model.filter.FilterFormEntry;
 
 import javax.el.MethodExpression;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public abstract class DataTableBase extends UIData
@@ -114,7 +116,9 @@ public abstract class DataTableBase extends UIData
         escapeText,
         rowEditMode,
         stickyTopAt,
-        globalFilterFunction
+        globalFilterFunction,
+
+        filterFormEntries
     }
 
     public DataTableBase() {
@@ -718,5 +722,13 @@ public abstract class DataTableBase extends UIData
 
     public void setGlobalFilterFunction(MethodExpression globalFilterFunction) {
         getStateHelper().put(PropertyKeys.globalFilterFunction, globalFilterFunction);
+    }
+
+    public List<FilterFormEntry> getFilterFormEntries() {
+        return (List<FilterFormEntry>) getStateHelper().eval(PropertyKeys.filterFormEntries, null);
+    }
+
+    public void getFilterFormEntries(List<FilterFormEntry> filterFormEntries) {
+        getStateHelper().put(PropertyKeys.filterFormEntries, filterFormEntries);
     }
 }

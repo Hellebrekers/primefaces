@@ -26,6 +26,14 @@ PrimeFaces.widget.InputText = PrimeFaces.widget.BaseWidget.extend({
 
         PrimeFaces.skinInput(this.jq);
 
+        var $this = this;
+        this.jq.on('keyup', function(e) {
+            if($this.timeout) {
+                clearTimeout($this.timeout);
+            }
+            $this.timeout = setTimeout(function() { $this.invokeQueryBehavior(); }, $this.cfg.queryDelay);
+        });
+
         //Counter
         if(this.cfg.counter) {
             this.counter = this.cfg.counter ? $(PrimeFaces.escapeClientId(this.cfg.counter)) : null;
@@ -38,6 +46,16 @@ PrimeFaces.widget.InputText = PrimeFaces.widget.BaseWidget.extend({
                     $this.updateCounter();
                 });
             }
+        }
+    },
+
+    invokeQueryBehavior: function(event) {
+        if(this.hasBehavior('query')) {
+            this.callBehavior('query', {
+                params : [
+                    {name: this.id + '_query'}
+                ]
+            });
         }
     },
 

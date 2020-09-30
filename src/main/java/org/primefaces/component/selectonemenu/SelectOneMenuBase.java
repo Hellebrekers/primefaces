@@ -64,7 +64,8 @@ public abstract class SelectOneMenuBase extends HtmlSelectOneMenu implements Wid
         touchable,
 
         disabledAsLabel,
-        mutator
+        mutator,
+        initialValueIsFirstSelectItem
     }
 
     public SelectOneMenuBase() {
@@ -274,6 +275,7 @@ public abstract class SelectOneMenuBase extends HtmlSelectOneMenu implements Wid
         getStateHelper().put(PropertyKeys.disabledAsLabel, disabledAsLabel);
     }
 
+<<<<<<< Updated upstream
     public AttributeMutator getMutator() {
         return (AttributeMutator) getStateHelper().eval(PropertyKeys.mutator, null);
     }
@@ -300,5 +302,13 @@ public abstract class SelectOneMenuBase extends HtmlSelectOneMenu implements Wid
     @Override
     public String getTabindex() {
         return AttributeMutator.optionallyOverrideTabindex(super.getTabindex(), getMutator());
+=======
+    public boolean isInitialValueIsFirstSelectItem() {
+        return (Boolean) getStateHelper().eval(PropertyKeys.initialValueIsFirstSelectItem, false);
+    }
+
+    public void setInitialValueIsFirstSelectItem(boolean initialValueIsFirstSelectItem) {
+        getStateHelper().put(PropertyKeys.initialValueIsFirstSelectItem, initialValueIsFirstSelectItem);
+>>>>>>> Stashed changes
     }
 }

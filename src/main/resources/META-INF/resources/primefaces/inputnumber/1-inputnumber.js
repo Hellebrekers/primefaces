@@ -83,6 +83,12 @@ PrimeFaces.widget.InputNumber = PrimeFaces.widget.BaseWidget.extend({
         }
         this.input.prop('onkeyup', null).off('keyup').on('keyup.inputnumber', function (e) {
 
+            var $this = this;
+            if($this.timeout) {
+                clearTimeout($this.timeout);
+            }
+            $this.timeout = setTimeout(function() { $this.invokeQueryBehavior(); }, $this.cfg.queryDelay);
+
             var oldValue;
 
             var keyCode = e.which;
@@ -134,6 +140,16 @@ PrimeFaces.widget.InputNumber = PrimeFaces.widget.BaseWidget.extend({
         this.input.off('input.inputnumber').on('input.inputnumber', function (e) {
             $this.copyValueToHiddenInput();
         });
+    },
+
+    invokeQueryBehavior: function(event) {
+        if(this.hasBehavior('query')) {
+            this.callBehavior('query', {
+                params : [
+                    {name: this.id + '_query'}
+                ]
+            });
+        }
     },
 
     /**

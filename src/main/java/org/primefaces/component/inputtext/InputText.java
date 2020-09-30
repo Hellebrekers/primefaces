@@ -24,8 +24,10 @@
 package org.primefaces.component.inputtext;
 
 import org.primefaces.model.Disableable;
+import org.primefaces.util.LangUtils;
 
 import javax.faces.application.ResourceDependency;
+import java.util.Collection;
 
 @ResourceDependency(library = "primefaces", name = "components.css")
 @ResourceDependency(library = "primefaces", name = "jquery/jquery.js")
@@ -36,4 +38,20 @@ public class InputText extends InputTextBase implements Disableable {
     public static final String COMPONENT_TYPE = "org.primefaces.component.InputText";
 
     public static final String STYLE_CLASS = "ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all";
+
+    private static final Collection<String> EVENT_NAMES = LangUtils.unmodifiableList("blur", "change", "valueChange", "click", "dblclick",
+            "focus", "keydown", "keypress", "keyup", "mousedown", "mousemove", "mouseout", "mouseover", "mouseup", "select",
+            "query");
+    private static final Collection<String> UNOBSTRUSIVE_EVENT_NAMES = LangUtils.unmodifiableList("query");
+
+    @Override
+    public Collection<String> getEventNames() {
+        return EVENT_NAMES;
+    }
+
+    @Override
+    public Collection<String> getUnobstrusiveEventNames() {
+        return UNOBSTRUSIVE_EVENT_NAMES;
+    }
+
 }

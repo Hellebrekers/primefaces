@@ -24,6 +24,7 @@
 package org.primefaces.component.column;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.component.UIComponent;
@@ -34,6 +35,25 @@ import org.primefaces.component.celleditor.CellEditor;
 public class Column extends ColumnBase {
 
     public static final String COMPONENT_TYPE = "org.primefaces.component.Column";
+
+    public List<String> getFilterFormMatchModes() {
+        switch (getFilterFormDataType()) {
+            case "text":
+                return Arrays.asList("contains", "exact", "startsWith", "endsWith");
+            case "int":
+                return Arrays.asList("equals", "lt", "lte", "gt", "gte", "between", "startsWith", "endsWith", "contains");
+            case "decimal":
+                return Arrays.asList("equals", "lt", "lte", "gt", "gte", "between");
+            case "date":
+                return Arrays.asList("today", "yesterday", "currentWeek", "currentMonth", "currentYear",
+                        "equalsDay", "ltDay", "gtDay", "betweenDay");
+            case "timestamp":
+                return Arrays.asList("today", "yesterday", "currentWeek", "currentMonth", "currentYear",
+                        "equalsDay", "ltDay", "gtDay", "betweenDay", "equals", "lt", "gt", "between");
+            default:
+                return null;
+        }
+    }
 
     @Override
     public CellEditor getCellEditor() {

@@ -68,6 +68,11 @@ public class FilterFeature implements DataTableFeature {
             .put(MatchMode.IN, new InFilterConstraint())
             .put(MatchMode.GLOBAL, new GlobalFilterConstraint())
 
+            .put(MatchMode.TODAY, new TodayFilterConstraint())
+            .put(MatchMode.YESTERDAY, new YesterdayFilterConstraint())
+            .put(MatchMode.CURRENT_WEEK, new CurrentWeekFilterConstraint())
+            .put(MatchMode.CURRENT_MONTH, new CurrentMonthFilterConstraint())
+            .put(MatchMode.CURRENT_YEAR, new CurrentYearFilterConstraint())
             .put(MatchMode.LESS_THEN_DAY, new LessThanDayFilterConstraint())
             .put(MatchMode.EQUALS_DAY, new EqualsDayFilterConstraint())
             .put(MatchMode.GREATER_THEN_DAY, new GreaterThanDayFilterConstraint())
@@ -428,61 +433,79 @@ public class FilterFeature implements DataTableFeature {
     private void populateFilterByWithoutColumnGroups(FacesContext context, DataTable table, Map<String, FilterMeta> filterBy,
                                                            Map<String, String> params, String separator) {
 
-        for (UIColumn column : table.getColumns()) {
-            ValueExpression filterVE = column.getValueExpression(Column.PropertyKeys.filterBy.toString());
-            if (filterVE != null) {
-                UIComponent filterFacet = column.getFacet("filter");
-                Object filterValue = null;
-                String filterId;
-                String filterMatchMode = null;
-                String filterType = null;
-
-                if (column instanceof Column) {
-                    filterId = column.getClientId(context) + separator + "filter";
-                    filterType = ((Column) column).getFilterType();
-                    filterValue = ComponentUtils.shouldRenderFacet(filterFacet) ? ((ValueHolder) filterFacet).getLocalValue() : params.get(filterId);
-                    if (isFilterValueEmpty(filterValue)) {
-                        if (((Column) column).getExternalFilter() == null) {
-                            filterValue = null;
-                        }
-                        else { // Since TClickFaces links the hidden inputText, we don't want to constantly look up the externalFilter
-                            UIComponent externalFilterComponent = SearchExpressionFacade.resolveComponent(context,
-                                    table,
-                                    ((Column) column).getExternalFilter());
-                            Object externalFilterValue = ((ValueHolder) externalFilterComponent).getValue();
-                            if (this.isFilterValueEmpty(externalFilterValue)) {
-                                filterValue = null;
-                            }
-                            else {
-                                // toString() because because of the inputText filters they get cast later on
-                                filterValue = externalFilterValue.toString();
-                            }
-                        }
-                    }
-
-                    filterMatchMode = column.getFilterMatchMode();
-                }
-                else if (column instanceof DynamicColumn) {
-                    DynamicColumn dynamicColumn = (DynamicColumn) column;
-                    dynamicColumn.applyModel();
-                    filterId = dynamicColumn.getContainerClientId(context) + separator + "filter";
-                    filterType = "text";
-                    filterValue = ComponentUtils.shouldRenderFacet(filterFacet) ? ((ValueHolder) filterFacet).getLocalValue() : params.get(filterId);
-                    if (isFilterValueEmpty(filterValue)) {
-                        filterValue = null;
-                    }
-                    filterMatchMode = column.getFilterMatchMode();
-                    dynamicColumn.cleanModel();
-                }
-
-                if (filterValue != null) {
+        List<FilterFormEntry> filterFormEntries = table.getFilterFormEntries();
+        if (filterFormEntries != null) {
+            for (FilterFormEntry filterFormEntry : filterFormEntries) {
+                Column column = (Column) table.getColumnWithId(filterFormEntry.getColumnId());
+                Object filterFormEntryValue = filterFormEntry.getValue();
+                if (filterFormEntryValue != null) {
                     String filterField = getFilterField(table, column);
                     filterBy.put(filterField, createFilterMetaInstance(filterField,
                             column.getColumnKey(),
-                            filterVE,
-                            MatchMode.byName(filterMatchMode),
-                            filterValue,
-                            filterType));
+                            null,
+                            MatchMode.byName(filterFormEntry.getFilterMatchMode()),
+                            filterFormEntryValue,
+                            column.getFilterFormDataType()));
+                }
+            }
+        }
+        else {
+            for (UIColumn column : table.getColumns()) {
+                ValueExpression filterVE = column.getValueExpression(Column.PropertyKeys.filterBy.toString());
+                if (filterVE != null) {
+                    UIComponent filterFacet = column.getFacet("filter");
+                    Object filterValue = null;
+                    String filterId;
+                    String filterMatchMode = null;
+                    String filterType = null;
+
+                    if (column instanceof Column) {
+                        filterId = column.getClientId(context) + separator + "filter";
+                        filterType = ((Column) column).getFilterType();
+                        filterValue = ComponentUtils.shouldRenderFacet(filterFacet) ? ((ValueHolder) filterFacet).getLocalValue() : params.get(filterId);
+                        if (isFilterValueEmpty(filterValue)) {
+                            if (((Column) column).getExternalFilter() == null) {
+                                filterValue = null;
+                            }
+                            else { // Since TClickFaces links the hidden inputText, we don't want to constantly look up the externalFilter
+                                UIComponent externalFilterComponent = SearchExpressionFacade.resolveComponent(context,
+                                        table,
+                                        ((Column) column).getExternalFilter());
+                                Object externalFilterValue = ((ValueHolder) externalFilterComponent).getValue();
+                                if (this.isFilterValueEmpty(externalFilterValue)) {
+                                    filterValue = null;
+                                }
+                                else {
+                                    // toString() because because of the inputText filters they get cast later on
+                                    filterValue = externalFilterValue.toString();
+                                }
+                            }
+                        }
+
+                        filterMatchMode = column.getFilterMatchMode();
+                    }
+                    else if (column instanceof DynamicColumn) {
+                        DynamicColumn dynamicColumn = (DynamicColumn) column;
+                        dynamicColumn.applyModel();
+                        filterId = dynamicColumn.getContainerClientId(context) + separator + "filter";
+                        filterType = "text";
+                        filterValue = ComponentUtils.shouldRenderFacet(filterFacet) ? ((ValueHolder) filterFacet).getLocalValue() : params.get(filterId);
+                        if (isFilterValueEmpty(filterValue)) {
+                            filterValue = null;
+                        }
+                        filterMatchMode = column.getFilterMatchMode();
+                        dynamicColumn.cleanModel();
+                    }
+
+                    if (filterValue != null) {
+                        String filterField = getFilterField(table, column);
+                        filterBy.put(filterField, createFilterMetaInstance(filterField,
+                                column.getColumnKey(),
+                                filterVE,
+                                MatchMode.byName(filterMatchMode),
+                                filterValue,
+                                filterType));
+                    }
                 }
             }
         }

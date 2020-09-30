@@ -70,7 +70,9 @@ public abstract class ColumnBase extends UIColumn implements org.primefaces.comp
         groupRow,
         exportHeaderValue,
         exportFooterValue,
-        externalFilter
+
+        externalFilter,
+        filterFormDataType
     }
 
     public ColumnBase() {
@@ -388,12 +390,19 @@ public abstract class ColumnBase extends UIColumn implements org.primefaces.comp
         getStateHelper().put(PropertyKeys.exportFooterValue, exportFooterValue);
     }
 
-    public java.lang.String getExternalFilter() {
-        return (java.lang.String) getStateHelper().eval(PropertyKeys.externalFilter, null);
+    public String getExternalFilter() {
+        return (String) getStateHelper().eval(PropertyKeys.externalFilter, null);
     }
 
-    public void setExternalFilter(java.lang.String externalFilter) {
+    public void setExternalFilter(String externalFilter) {
         getStateHelper().put(PropertyKeys.externalFilter, externalFilter);
     }
 
+    public String getFilterFormDataType() {
+        return (String) getStateHelper().eval(PropertyKeys.filterFormDataType, null);
+    }
+
+    public void setFilterFormDataType(String filterFormDataType) {
+        getStateHelper().put(PropertyKeys.filterFormDataType, filterFormDataType);
+    }
 }

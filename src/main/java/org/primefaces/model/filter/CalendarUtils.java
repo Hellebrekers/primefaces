@@ -46,6 +46,12 @@ public class CalendarUtils {
         return cal;
     }
 
+    private static Date add(Date date, int calendarField, int amount) {
+        Calendar c = of(date);
+        c.add(calendarField, amount);
+        return c.getTime();
+    }
+
     public static Date getStartOfDay(Date date) {
         Calendar cal = of(date);
         cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -62,6 +68,73 @@ public class CalendarUtils {
         cal.set(Calendar.SECOND, 59);
         cal.set(Calendar.MILLISECOND, 999);
         return cal.getTime();
+    }
+
+    public static Date getPreviousDay(Date date) {
+        return add(date, Calendar.DAY_OF_YEAR, -1);
+    }
+
+    /**
+     * Convenience methods resolving calendar fields from Date objects
+     */
+    public static Integer resolveCalendarfield(Date date, int calendarField) {
+        return of(date).get(calendarField);
+    }
+
+    public static Integer getYear(Date date) {
+        return resolveCalendarfield(date, Calendar.YEAR);
+    }
+
+    public static Integer getCurrentYear() {
+        return getYear(new Date());
+    }
+
+    public static Integer getMonth(Date date) {
+        return resolveCalendarfield(date, Calendar.MONTH);
+    }
+
+    public static Integer getCurrentMonth() {
+        return getMonth(new Date());
+    }
+
+    public static Integer getWeekOfMonth(Date date) {
+        return resolveCalendarfield(date, Calendar.WEEK_OF_MONTH);
+    }
+
+    public static Integer getCurrentWeekOfMonth() {
+        return getWeekOfMonth(new Date());
+    }
+
+    public static Integer getWeekOfYear(Date date) {
+        return resolveCalendarfield(date, Calendar.WEEK_OF_YEAR);
+    }
+
+    public static Integer getCurrentWeekOfYear() {
+        return getWeekOfYear(new Date());
+    }
+
+    public static Integer getDayOfYear(Date date) {
+        return resolveCalendarfield(date, Calendar.DAY_OF_YEAR);
+    }
+
+    public static Integer getCurrentDayOfYear() {
+        return getDayOfYear(new Date());
+    }
+
+    public static Integer getDayOfMonth(Date date) {
+        return resolveCalendarfield(date, Calendar.DAY_OF_MONTH);
+    }
+
+    public static Integer getCurrentDayOfMonth() {
+        return getDayOfMonth(new Date());
+    }
+
+    public static Integer getDayOfWeek(Date date) {
+        return resolveCalendarfield(date, Calendar.DAY_OF_WEEK);
+    }
+
+    public static Integer getCurrentDayOfWeek() {
+        return getDayOfWeek(new Date());
     }
 
 }
