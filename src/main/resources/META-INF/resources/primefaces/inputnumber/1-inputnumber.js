@@ -49,7 +49,7 @@ PrimeFaces.widget.InputNumber = PrimeFaces.widget.BaseWidget.extend({
         //Visual effects
         PrimeFaces.skinInput(this.input);
 
-        this.wrapEvents();
+        this.wrapEvents(cfg);
 
         this.autonumeric = new AutoNumeric(this.jqId + '_input', this.cfg);
 
@@ -70,7 +70,7 @@ PrimeFaces.widget.InputNumber = PrimeFaces.widget.BaseWidget.extend({
      * callback.
      * @private
      */
-    wrapEvents: function() {
+    wrapEvents: function(cfg) {
         var $this = this;
 
         // get the current attached events if using CSP
@@ -83,11 +83,10 @@ PrimeFaces.widget.InputNumber = PrimeFaces.widget.BaseWidget.extend({
         }
         this.input.prop('onkeyup', null).off('keyup').on('keyup.inputnumber', function (e) {
 
-            var $this = this;
             if($this.timeout) {
                 clearTimeout($this.timeout);
             }
-            $this.timeout = setTimeout(function() { $this.invokeQueryBehavior(); }, $this.cfg.queryDelay);
+            $this.timeout = setTimeout(function() { $this.invokeQueryBehavior(); }, cfg.queryDelay);
 
             var oldValue;
 
