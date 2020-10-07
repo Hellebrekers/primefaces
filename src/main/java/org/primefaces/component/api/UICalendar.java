@@ -36,6 +36,8 @@ import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.component.inputnumber.InputNumberBase;
+import org.primefaces.model.AttributeMutator;
 import org.primefaces.util.CalendarUtils;
 import org.primefaces.util.LangUtils;
 import org.primefaces.util.LocaleUtils;
@@ -74,7 +76,9 @@ public abstract class UICalendar extends AbstractPrimeHtmlInputText implements I
         touchable,
         mask,
         maskSlotChar,
-        maskAutoClear
+        maskAutoClear,
+
+        mutator
     }
 
     public Object getLocale() {
@@ -380,5 +384,33 @@ public abstract class UICalendar extends AbstractPrimeHtmlInputText implements I
             String component = this.getClass().getSimpleName();
             throw new FacesException(component + " : \"" + id + "\" minimum date must be less than maximum date.");
         }
+    }
+
+    public AttributeMutator getMutator() {
+        return (AttributeMutator) getStateHelper().eval(InputNumberBase.PropertyKeys.mutator, null);
+    }
+
+    public void setMutator(AttributeMutator mutator) {
+        getStateHelper().put(InputNumberBase.PropertyKeys.mutator, mutator);
+    }
+
+    @Override
+    public boolean isRendered() {
+        return AttributeMutator.optionallyOverrideRendered(super.isRendered(), getMutator());
+    }
+
+    @Override
+    public boolean isRequired() {
+        return AttributeMutator.optionallyOverrideRequired(super.isRequired(), getMutator());
+    }
+
+    @Override
+    public boolean isDisabled() {
+        return AttributeMutator.optionallyOverrideDisabled(super.isDisabled(), getMutator());
+    }
+
+    @Override
+    public String getTabindex() {
+        return AttributeMutator.optionallyOverrideTabindex(super.getTabindex(), getMutator());
     }
 }
