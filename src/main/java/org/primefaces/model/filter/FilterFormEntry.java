@@ -62,11 +62,11 @@ public class FilterFormEntry implements Serializable {
     }
 
     public boolean filterMatchModeIsDateUtility() {
-        return filterMatchMode != null && filterMatchMode.equals("today")
+        return filterMatchMode != null && (filterMatchMode.equals("today")
                 || filterMatchMode.equals("yesterday")
                 || filterMatchMode.equals("currentWeek")
                 || filterMatchMode.equals("currentMonth")
-                || filterMatchMode.equals("currentYear");
+                || filterMatchMode.equals("currentYear"));
     }
 
     public void clearValues() {
@@ -93,6 +93,9 @@ public class FilterFormEntry implements Serializable {
             }
             return null;
         }
+        else if (filterMatchModeIsDateUtility()) {
+            return true; //Always return true so we know it's a valid filterFormEntry
+        }
         else {
             if (textValue != null) {
                 return textValue;
@@ -107,12 +110,7 @@ public class FilterFormEntry implements Serializable {
                 return decimalValue1;
             }
             else if (dateValue1 != null) {
-                if (filterMatchModeIsDateUtility()) {
-                    return true; // Don't return null, so we know it is a valid FilterFormEntry
-                }
-                else {
-                    return dateValue1;
-                }
+                return dateValue1;
             }
             return null;
         }
