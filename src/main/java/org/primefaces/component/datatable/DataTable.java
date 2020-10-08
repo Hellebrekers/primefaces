@@ -56,6 +56,7 @@ import org.primefaces.event.data.FilterEvent;
 import org.primefaces.event.data.PageEvent;
 import org.primefaces.event.data.SortEvent;
 import org.primefaces.model.*;
+import org.primefaces.model.filter.FilterFormEntry;
 import org.primefaces.util.*;
 
 import static java.util.stream.Collectors.toList;
@@ -925,6 +926,12 @@ public class DataTable extends DataTableBase {
 
     public List<UIColumn> getColumnsWithFilterFormDataType() {
         return getColumns().stream().filter(c -> ((Column) c).getFilterFormDataType() != null).collect(toList());
+    }
+
+    public List<UIColumn> getNonStaticColumnsWithFilterFormDataType(List<FilterFormEntry> entries) {
+        return getColumnsWithFilterFormDataType().stream()
+                .filter(c -> !entries.stream().anyMatch(e -> e.getStaticColumn() && ((Column) c).getId().equals(e.getColumnId())))
+                .collect(toList());
     }
 
     public UIColumn getColumnWithId(String id) {
