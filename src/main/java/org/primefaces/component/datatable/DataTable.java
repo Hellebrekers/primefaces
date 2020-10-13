@@ -924,13 +924,13 @@ public class DataTable extends DataTableBase {
         return null;
     }
 
-    public List<UIColumn> getColumnsWithFilterFormDataType() {
-        return getColumns().stream().filter(c -> ((Column) c).getFilterFormDataType() != null).collect(toList());
-    }
-
-    public List<UIColumn> getNonStaticColumnsWithFilterFormDataType(List<FilterFormEntry> entries) {
-        return getColumnsWithFilterFormDataType().stream()
-                .filter(c -> !entries.stream().anyMatch(e -> e.getStaticColumn() && ((Column) c).getId().equals(e.getColumnId())))
+    public List<UIColumn> getAvailableColumnsWithFilterFormDataType(List<FilterFormEntry> entries, FilterFormEntry currentFilterFormEntry) {
+        return getColumns().stream().map(c -> (Column) c)
+                .filter(c -> c.getFilterFormDataType() != null)
+                .filter(c -> {
+                    boolean isEqualToCurrentFilterFormEntry = c.getId().equals(currentFilterFormEntry.getColumnId());
+                    return isEqualToCurrentFilterFormEntry || entries.stream().noneMatch(e -> e.getColumnId() != null && e.getColumnId().equals(c.getId()));
+                })
                 .collect(toList());
     }
 
