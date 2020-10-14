@@ -4827,9 +4827,16 @@ function () {
   }, {
     key: "_onFocusIn",
     value: function _onFocusIn(e) {
-      if (this.settings.selectOnFocus) {
+      // We treat zero as an empty value
+      if (this.settings.selectOnFocus || this.getNumber() === 0) {
         // The whole input content is selected on focus (following the `selectOnFocus` and `selectNumberOnly` options)
         //XXX Firefox <47 does not respect this selection...Oh well.
+
+        // Safari doesn't respect the selection and by default clears it on mouseup
+        /*var browser = _AutoNumericHelper__WEBPACK_IMPORTED_MODULE_0__["default"].browser();
+        if (browser.name === 'safari' && !this.onmouseup) {
+          this.onmouseup = function(e) {e.preventDefault()}
+        } */
         this.select();
       } else {
         // Or we decide where to put the caret using the `caretPositionOnFocus` option
