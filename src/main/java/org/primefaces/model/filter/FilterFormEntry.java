@@ -97,7 +97,7 @@ public class FilterFormEntry implements Serializable {
             return true; //Always return true so we know it's a valid filterFormEntry
         }
         else {
-            if (textValue != null) {
+            if (textValue != null && !textValue.trim().isEmpty()) {
                 return textValue;
             }
             else if (booleanValue != null) {
@@ -130,6 +130,7 @@ public class FilterFormEntry implements Serializable {
 
     public void setColumnId(String columnId) {
         clearValues();
+        this.filterMatchMode = null;
         this.columnId = columnId;
     }
 

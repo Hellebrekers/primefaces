@@ -35,7 +35,9 @@ public class SearchExpressionConstants {
     public static final String NAMINGCONTAINER_KEYWORD =    KEYWORD_PREFIX + "namingcontainer";
     public static final String ALL_KEYWORD =                KEYWORD_PREFIX + "all";
     public static final String NEXT_KEYWORD =               KEYWORD_PREFIX + "next";
+    public static final String AFTER_KEYWORD =              KEYWORD_PREFIX + "after";
     public static final String PREVIOUS_KEYWORD =          KEYWORD_PREFIX + "previous";
+    public static final String BEFORE_KEYWORD =             KEYWORD_PREFIX + "before";
     public static final String CHILD_KEYWORD =              KEYWORD_PREFIX + "child";
     public static final String WIDGETVAR_KEYWORD =          KEYWORD_PREFIX + "widgetVar";
     public static final String ROW_KEYWORD =                KEYWORD_PREFIX + "row";

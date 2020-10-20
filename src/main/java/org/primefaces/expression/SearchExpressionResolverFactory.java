@@ -27,22 +27,7 @@ import java.util.HashMap;
 
 import javax.faces.FacesException;
 
-import org.primefaces.expression.impl.AllExpressionResolver;
-import org.primefaces.expression.impl.ChildExpressionResolver;
-import org.primefaces.expression.impl.CompositeExpressionResolver;
-import org.primefaces.expression.impl.FormExpressionResolver;
-import org.primefaces.expression.impl.FindComponentExpressionResolver;
-import org.primefaces.expression.impl.IdExpressionResolver;
-import org.primefaces.expression.impl.JQuerySelectorExpressionResolver;
-import org.primefaces.expression.impl.NamingContainerExpressionResolver;
-import org.primefaces.expression.impl.NextExpressionResolver;
-import org.primefaces.expression.impl.NoneExpressionResolver;
-import org.primefaces.expression.impl.ParentExpressionResolver;
-import org.primefaces.expression.impl.PreviousExpressionResolver;
-import org.primefaces.expression.impl.RootExpressionResolver;
-import org.primefaces.expression.impl.RowExpressionResolver;
-import org.primefaces.expression.impl.ThisExpressionResolver;
-import org.primefaces.expression.impl.WidgetVarExpressionResolver;
+import org.primefaces.expression.impl.*;
 
 /**
  * Factory for providing different {@link SearchExpressionResolver} for expressions.
@@ -62,7 +47,9 @@ public class SearchExpressionResolverFactory {
         RESOLVER_MAPPING.put(SearchExpressionConstants.NAMINGCONTAINER_KEYWORD, new NamingContainerExpressionResolver());
         RESOLVER_MAPPING.put(SearchExpressionConstants.NONE_KEYWORD, new NoneExpressionResolver());
         RESOLVER_MAPPING.put(SearchExpressionConstants.NEXT_KEYWORD, new NextExpressionResolver());
+        RESOLVER_MAPPING.put(SearchExpressionConstants.AFTER_KEYWORD, new AfterExpressionResolver());
         RESOLVER_MAPPING.put(SearchExpressionConstants.PREVIOUS_KEYWORD, new PreviousExpressionResolver());
+        RESOLVER_MAPPING.put(SearchExpressionConstants.BEFORE_KEYWORD, new BeforeExpressionResolver());
         RESOLVER_MAPPING.put(SearchExpressionConstants.CHILD_KEYWORD, new ChildExpressionResolver());
         RESOLVER_MAPPING.put(SearchExpressionConstants.WIDGETVAR_KEYWORD, new WidgetVarExpressionResolver());
         RESOLVER_MAPPING.put(SearchExpressionConstants.KEYWORD_PREFIX, new JQuerySelectorExpressionResolver());
