@@ -28,7 +28,7 @@ PrimeFaces.widget.TieredMenu = PrimeFaces.widget.Menu.extend({
         this._super(cfg);
 
         this.cfg.toggleEvent = this.cfg.toggleEvent || 'hover';
-        this.links = this.jq.find('a.ui-menuitem-link:not(.ui-state-disabled)');
+        this.links = this.jq.find('a.ui-menuitem-link');
         this.rootLinks = this.jq.find('> ul.ui-menu-list > .ui-menuitem > .ui-menuitem-link');
 
         this.bindEvents();
