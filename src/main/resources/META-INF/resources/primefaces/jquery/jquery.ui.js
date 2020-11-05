@@ -2252,7 +2252,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 
 	cancel: function() {
 
-		if ( this.helper.is( ".ui-draggable-dragging" ) ) {
+		if ( this.helper && this.helper.is( ".ui-draggable-dragging" ) ) {
 			this._mouseUp( new $.Event( "mouseup", { target: this.element[ 0 ] } ) );
 		} else {
 			this._clear();
@@ -2644,7 +2644,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 
 	_clear: function() {
 		this._removeClass( this.helper, "ui-draggable-dragging" );
-		if ( this.helper[ 0 ] !== this.element[ 0 ] && !this.cancelHelperRemoval ) {
+		if ( this.helper && (this.helper[ 0 ] !== this.element[ 0 ] && !this.cancelHelperRemoval )) {
 			this.helper.remove();
 		}
 		this.helper = null;
