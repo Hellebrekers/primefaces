@@ -7243,7 +7243,7 @@ function () {
       // Do not allow decimal character if no decimal part allowed
 
 
-      if (this.eventKey === this.settings.decimalCharacter || this.settings.decimalCharacterAlternative && this.eventKey === this.settings.decimalCharacterAlternative) {
+      if ( this.eventKey === "." || this.eventKey === "," || this.eventKey === this.settings.decimalCharacter || this.settings.decimalCharacterAlternative && this.eventKey === this.settings.decimalCharacterAlternative) {
         if (!this._isDecimalCharacterInsertionAllowed() || !this.settings.decimalCharacter) {
           return false;
         }
