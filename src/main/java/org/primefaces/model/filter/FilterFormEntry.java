@@ -23,8 +23,6 @@
  */
 package org.primefaces.model.filter;
 
-import javax.el.MethodExpression;
-import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -45,8 +43,6 @@ public class FilterFormEntry implements Serializable {
     private BigDecimal decimalValue2;
     private Date dateValue1;
     private Date dateValue2;
-
-    private MethodExpression autocompleteMethod;
 
     public static FilterFormEntry newWithStaticColumn(String columnId) {
         FilterFormEntry filterFormEntry = new FilterFormEntry();
@@ -208,17 +204,5 @@ public class FilterFormEntry implements Serializable {
 
     public void setDateValue2(Date dateValue2) {
         this.dateValue2 = dateValue2;
-    }
-
-    public MethodExpression getAutocompleteMethod() {
-        return autocompleteMethod;
-    }
-
-    public void setAutocompleteMethod(MethodExpression autocompleteMethod) {
-        this.autocompleteMethod = autocompleteMethod;
-    }
-
-    public Object autocompleteMethod(String text) {
-        return this.autocompleteMethod.invoke(FacesContext.getCurrentInstance().getELContext(), new Object[] {text});
     }
 }
